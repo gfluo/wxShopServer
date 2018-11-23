@@ -1,0 +1,24 @@
+{
+  "name": "wxshopserver",
+  "version": "1.0.0",
+  "description": "wx shop",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gfluo/wxShopServer.git"
+  },
+  "author": "zoroshow@outlook.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gfluo/wxShopServer/issues"
+  },
+  "homepage": "https://github.com/gfluo/wxShopServer#readme",
+  "dependencies": {
+    "koa": "^2.6.2",
+    "koa-router": "^7.4.0",
+    "request": "^2.88.0"
+  }
+}
