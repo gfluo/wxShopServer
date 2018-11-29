@@ -10,6 +10,22 @@ class Main {
             }
         }
     }
+
+    static async merchandiseGetByStatus(ctx, next) {
+        ///console.log('fuck');
+        let { status } = ctx.request.body;
+        try {
+            platformWx.getMerchandise({status});
+            ctx.body = {
+                code: 0,
+                data: {
+                    msg: 'Welcome everyone!'
+                }
+            }
+        } catch (e) {
+
+        }
+    }
 }
 
 module.exports = Main;

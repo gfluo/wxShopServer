@@ -14,4 +14,24 @@ async function get(params) {
     });
 }
 
+async function post(params) {
+    let { url, postData } = params;
+    return new Promise((resolve, reject) => {
+        request({
+            url: url,
+            method: "POST",
+            json: true,
+            headers: {
+                "content-type": "application/json",
+            },
+            body: postData
+        }, function(error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body) // 请求成功的处理逻辑
+            }
+        });
+    })
+}
+
 exports.get = get;
+exports.post = post;

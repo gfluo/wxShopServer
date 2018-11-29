@@ -4,6 +4,7 @@
 
 module.exports = {
     url: {
-        accessToken: `https://api.weixin.qq.com/cgi-bin/token`
+        accessToken: `https://api.weixin.qq.com/cgi-bin/token`,
+        merchandise: `https://api.weixin.qq.com/merchant/getbystatus`,
     }
 }
