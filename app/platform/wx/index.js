@@ -38,6 +38,7 @@ class Main {
             };
             filesrc = await readToken(path.join(__dirname, './token.json'));
             wxTokenInfo = JSON.parse(filesrc);
+            console.log(wxTokenInfo);
             let requestUrl =
                 url.merchandiseAdd + `?access_token=${wxTokenInfo.access_token}`;
             let result = await requestSelf.post({ url: requestUrl, postData: info });
