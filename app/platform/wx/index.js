@@ -16,7 +16,7 @@ class Main {
             let tokenInfo = JSON.parse(result);
             console.log(tokenInfo);
             let wxTokenInfo = {
-                token: tokenInfo["access_token"],
+                access_token: tokenInfo["access_token"],
                 createDate: new Date().getTime() + 7200 * 1000
             }
             fs.writeFileSync(path.join(__dirname, './token.json'), JSON.stringify(wxTokenInfo));
