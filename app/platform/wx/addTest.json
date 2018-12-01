@@ -1,0 +1,95 @@
+{
+    "product_base": {
+        "category_id": [
+            "537074298"
+        ],
+        "property": [
+            {
+                "id": "1075741879",
+                "vid": "1079749967"
+            },
+            {
+                "id": "1075754127",
+                "vid": "1079795198"
+            },
+            {
+                "id": "1075777334",
+                "vid": "1079837440"
+            }
+        ],
+        "name": "测试产品",
+        "sku_info": [
+            {
+                "id": "1075741873",
+                "vid": [
+                    "1079742386",
+                    "1079742363"
+                ]
+            }
+        ],
+        "main_img": "http://mmbiz.qpic.cn/mmbiz_png/Jyj2ddS0HRLI4O14MW9OlX5XPa1sDYQQFMgNssUKSkuzGkTmcmZfSY2GUjyOxoupPmQSERzafvOSawTcgiba2Kg/0",
+        "img": [
+            "http://mmbiz.qpic.cn/mmbiz_png/Jyj2ddS0HRLI4O14MW9OlX5XPa1sDYQQFMgNssUKSkuzGkTmcmZfSY2GUjyOxoupPmQSERzafvOSawTcgiba2Kg/0"
+        ],
+        "detail": [
+            {
+                "text": "测试详情"
+            },
+            {
+                "img": "http://mmbiz.qpic.cn/mmbiz_png/Jyj2ddS0HRLI4O14MW9OlX5XPa1sDYQQFMgNssUKSkuzGkTmcmZfSY2GUjyOxoupPmQSERzafvOSawTcgiba2Kg/0"
+            },
+            {
+                "text": "详情测试"
+            }
+        ],
+        "buy_limit": 10
+    },
+    "sku_list": [
+        {
+            "sku_id": "1075741873:1079742386",
+            "price": 30,
+            "icon_url": "http://mmbiz.qpic.cn/mmbiz_png/Jyj2ddS0HRLI4O14MW9OlX5XPa1sDYQQFMgNssUKSkuzGkTmcmZfSY2GUjyOxoupPmQSERzafvOSawTcgiba2Kg/0",
+            "product_code": "testing",
+            "ori_price": 9000000,
+            "quantity": 800
+        },
+        {
+            "sku_id": "1075741873:1079742363",
+            "price": 30,
+            "icon_url": "http://mmbiz.qpic.cn/mmbiz_png/Jyj2ddS0HRLI4O14MW9OlX5XPa1sDYQQFMgNssUKSkuzGkTmcmZfSY2GUjyOxoupPmQSERzafvOSawTcgiba2Kg/0",
+            "product_code": "testingtesting",
+            "ori_price": 9000000,
+            "quantity": 800
+        }
+    ],
+    "attrext": {
+        "location": {
+            "country": "中国",
+            "province": "广东省",
+            "city": "广州市",
+            "address": "T.I.T创意园"
+        },
+        "isPostFree": 0,
+        "isHasReceipt": 1,
+        "isUnderGuaranty": 0,
+        "isSupportReplace": 0
+    },
+    "delivery_info": {
+        "delivery_type": 0,
+        "template_id": 0,
+        "express": [
+            {
+                "id": 10000027,
+                "price": 100
+            },
+            {
+                "id": 10000028,
+                "price": 100
+            },
+            {
+                "id": 10000029,
+                "price": 100
+            }
+        ]
+    }
+}
