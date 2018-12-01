@@ -34,7 +34,7 @@ class Main {
             let wxTokenInfo = JSON.parse(filesrc);
             let now = new Date().getTime();
             if (now > wxTokenInfo.expire) { ///token已经过期
-                await this.getAccessToken();
+                ///await this.getAccessToken();
             };
             filesrc = await readToken(path.join(__dirname, './token.json'));
             wxTokenInfo = JSON.parse(filesrc);
