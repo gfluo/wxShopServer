@@ -62,6 +62,7 @@ class Main {
             wxTokenInfo = JSON.parse(filesrc);
             let requestUrl =
                 url.merchandise + `?access_token=${wxTokenInfo.access_token}`;
+            console.log(requestUrl);
             let result = await requestSelf.post({ url: requestUrl, postData: { status: status } });
             console.log(result);
         } catch (e) {
