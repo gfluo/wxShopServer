@@ -31,12 +31,14 @@ class Main {
             let infoSrc = await utilSelf.readJson(testInfoFile);
             let info = JSON.parse(infoSrc);
             let filesrc = await readToken(path.join(__dirname, './token.json'));
+            console.log(filesrc);
             let wxTokenInfo = JSON.parse(filesrc);
             let now = new Date().getTime();
             if (now > wxTokenInfo.expire) { ///token已经过期
                 ///await this.getAccessToken();
             };
             filesrc = await readToken(path.join(__dirname, './token.json'));
+            console.log(filesrc);
             wxTokenInfo = JSON.parse(filesrc);
             console.log(wxTokenInfo);
             let requestUrl =
