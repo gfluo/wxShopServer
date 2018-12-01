@@ -14,6 +14,7 @@ class Main {
                 url.accessToken + `?grant_type=client_credential&appid=${secretInfo.appid}&secret=${secretInfo.secret}`;
             let result = await requestSelf.get({ url: requestUrl });
             let tokenInfo = JSON.parse(result);
+            console.log(tokenInfo);
             let wxTokenInfo = {
                 token: tokenInfo["access_token"],
                 createDate: new Date().getTime() + 7200 * 1000
@@ -31,9 +32,16 @@ class Main {
             let info = JSON.parse(infoSrc);
             let filesrc = await readToken(path.join(__dirname, './token.json'));
             let wxTokenInfo = JSON.parse(filesrc);
+            let now = new Date().getTime();
+            if (now > wxTokenInfo.expire) { ///token已经过期
+                await this.getAccessToken();
+            };
+            filesrc = await readToken(path.join(__dirname, './token.json'));
+            wxTokenInfo = JSON.parse(filesrc);
             let requestUrl =
                 url.merchandiseAdd + `?access_token=${wxTokenInfo.access_token}`;
-            let result = await requestSelf.post({ url: requestUrl, postData: info })
+            let result = await requestSelf.post({ url: requestUrl, postData: info });
+            console.log(result);
         } catch (e) {
             console.error(e);
         }
