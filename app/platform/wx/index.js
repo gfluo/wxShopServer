@@ -5,6 +5,18 @@ const requestSelf = require('../../request/index');
 const fs = require('fs');
 const { url } = require('./remote');
 class Main {
+    static async getToken() {
+        let filesrc = await readToken(path.join(__dirname, './token.json'));    ///token字符串化
+        let wxTokenInfo = JSON.parse(filesrc);
+        let now = new Date().getTime();
+        if (now > wxTokenInfo.expire) { ///token已经过期
+            await this.getAccessToken();
+            filesrc = await readToken(path.join(__dirname, './token.json'));
+            wxTokenInfo = JSON.parse(filesrc);
+        };
+        return wxTokenInfo.access_token;
+    }
+
     static async getAccessToken() {
         let secretFile = path.join(__dirname, '../../../private/wxSecret.json');
         try {
@@ -14,10 +26,10 @@ class Main {
                 url.accessToken + `?grant_type=client_credential&appid=${secretInfo.appid}&secret=${secretInfo.secret}`;
             let result = await requestSelf.get({ url: requestUrl });
             let tokenInfo = JSON.parse(result);
-            console.log(tokenInfo);
+            ///console.log(tokenInfo);
             let wxTokenInfo = {
                 access_token: tokenInfo["access_token"],
-                createDate: new Date().getTime() + 7200 * 1000
+                createDate: new Date().getTime() + 7140 * 1000
             }
             fs.writeFileSync(path.join(__dirname, './token.json'), JSON.stringify(wxTokenInfo));
         } catch (e) {
@@ -91,6 +103,21 @@ class Main {
             fs.writeFileSync(path.join(__dirname, './material.json'), JSON.stringify(material));
         } catch (e) {
 
+        }
+    }
+
+    static async getCategorySub(cid) {
+        try {
+            let token = await Main.getToken();
+            let requestUrl = url.getCategorySub + `?access_token=${token}`;
+            let postData = {
+                cate_id: cid
+            }
+            let result = await requestSelf.post({url: requestUrl, postData});
+            console.log(result);
+            return result;
+        } catch (e) {
+            throw (e);
         }
     }
 }

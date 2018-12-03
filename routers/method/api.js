@@ -1,14 +1,17 @@
 const platformWx = require('../../app/platform/wx/index');
+const source = require('../../app/source/index');
 const utilSelf = require('../../util/util'); 
 const path = require('path');
 class Main {
     static async merchandiseOnline(ctx, next) {
-        platformWx.merchandiseOnline();
-        ctx.body = {
-            code: 0,
-            msg: {
-                data: `调用成功`
-            }
+        try {
+            let mList = await source.merchandiseList({limit: 6});
+            for (let i = 0; i < mList.length; i++) {
+                let m = mList[i];
+                source.wxCidMatch(m.cat_id);
+            }   
+        } catch (e) {
+
         }
     }
 
