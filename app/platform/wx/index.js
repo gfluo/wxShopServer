@@ -109,7 +109,7 @@ class Main {
     static async getCategorySub(cid) {
         try {
             let token = await Main.getToken();
-            let requestUrl = url.getCategorySub + `?access_token=${token}`;
+            let requestUrl = url.categorySub + `?access_token=${token}`;
             let postData = {
                 cate_id: cid
             }
