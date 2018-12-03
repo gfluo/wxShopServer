@@ -25,6 +25,7 @@ class Main {
             let requestUrl =
                 url.accessToken + `?grant_type=client_credential&appid=${secretInfo.appid}&secret=${secretInfo.secret}`;
             let result = await requestSelf.get({ url: requestUrl });
+            console.log(result);
             let tokenInfo = JSON.parse(result);
             ///console.log(tokenInfo);
             let wxTokenInfo = {

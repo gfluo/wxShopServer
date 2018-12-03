@@ -9,3 +9,4 @@ app.use(bodyParser({
 }));
 app.use(routerApi.routes());
 app.listen(server.port);
+console.log(`server is on port ${server.port}`)
