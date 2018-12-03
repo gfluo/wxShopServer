@@ -30,7 +30,7 @@ class Main {
             ///console.log(tokenInfo);
             let wxTokenInfo = {
                 access_token: tokenInfo["access_token"],
-                createDate: new Date().getTime() + 7140 * 1000
+                expire: new Date().getTime() + 7140 * 1000
             }
             fs.writeFileSync(path.join(__dirname, './token.json'), JSON.stringify(wxTokenInfo));
         } catch (e) {
