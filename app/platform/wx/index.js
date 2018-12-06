@@ -25,7 +25,7 @@ class Main {
             let requestUrl =
                 url.accessToken + `?grant_type=client_credential&appid=${secretInfo.appid}&secret=${secretInfo.secret}`;
             let result = await requestSelf.get({ url: requestUrl });
-            console.log(result);
+            ///console.log(result);
             let tokenInfo = JSON.parse(result);
             ///console.log(tokenInfo);
             let wxTokenInfo = {
@@ -115,8 +115,10 @@ class Main {
                 cate_id: cid
             }
             let result = await requestSelf.post({url: requestUrl, postData});
-            console.log(result);
-            return result;
+            if (result.errmsg == "ok") {
+                return result.cate_list;
+            }
+            return [];
         } catch (e) {
             throw (e);
         }

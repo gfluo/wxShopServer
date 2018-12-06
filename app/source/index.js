@@ -27,8 +27,10 @@ class Main {
             let upCidSrc = await requestSelf.get({ url: requestUrl });
             const resBody = JSON.parse(upCidSrc);
             if (deep == 2 || deep == 3) {
+                console.log(resBody.data[0].cat_name);
                 return resBody.data[0].parent_id;
             } else {
+                console.log(resBody.data[0].cat_name);
                 return resBody.data[0].parent_id;
             }
         } catch (e) {
@@ -49,7 +51,9 @@ class Main {
             if (matchInfo[secondCid]) {
                 let wxTopCid = matchInfo[secondCid].wx_cid;
                 let wxSubInfo = await platformWx.getCategorySub(wxTopCid);
+                return wxSubInfo;
             }
+            return;
         } catch (e) {
             console.error(e);
         }

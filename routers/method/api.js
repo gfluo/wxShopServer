@@ -8,7 +8,8 @@ class Main {
             let mList = await source.merchandiseList({limit: 6});
             for (let i = 0; i < mList.length; i++) {
                 let m = mList[i];
-                source.wxCidMatch(m.cat_id);
+                let wxCidInfo =  await source.wxCidMatch(m.cat_id);
+                
             }   
         } catch (e) {
 
