@@ -68,6 +68,15 @@ async function uploadFile(params) {
     })
 }
 
+async function imgDownload(params) {
+    let { url, filedir } = params;
+    return new Promise((resolve, reject) => {
+        request(url).pipe(fs.createWriteStream(filedir));
+        resolve();
+    })
+}
+
+exports.imgDownload = imgDownload;
 exports.get = get;
 exports.post = post;
 exports.uploadFile = uploadFile;

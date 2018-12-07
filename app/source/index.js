@@ -51,11 +51,26 @@ class Main {
             if (matchInfo[secondCid]) {
                 let wxTopCid = matchInfo[secondCid].wx_cid;
                 let wxSubInfo = await platformWx.getCategorySub(wxTopCid);
-                return wxSubInfo;
+                if ('ok' == wxSubInfo.errmsg) {
+                    return wxSubInfo.cate_list[0]
+                }
             }
             return;
         } catch (e) {
             console.error(e);
+        }
+    }
+
+    /**
+     * @param {url, filedir}
+     */
+    static async imgDownload(params) {
+        try {
+            let filedir = path.join(__dirname, `./files/${params.filedir}`);
+            await requestSelf.imgDownload({url: `${url.imgHead}/${params.url}`, filedir});
+            return filedir;
+        } catch (e) {
+            throw(e);
         }
     }
 }

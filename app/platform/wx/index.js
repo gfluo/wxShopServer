@@ -86,7 +86,7 @@ class Main {
     }
 
     static async uploadImg(params) {
-        let { filename } = params;
+        let { filename, filedir} = params;
         try {
             let filesrc = await readToken(path.join(__dirname, './token.json'));
             let wxTokenInfo = JSON.parse(filesrc);
@@ -94,16 +94,13 @@ class Main {
                 url.uploadImg + `?access_token=${wxTokenInfo.access_token}`;
             let result = await requestSelf.uploadFile({
                 url: requestUrl,
-                filedir: path.join(__dirname, `../../../public/${filename}`),
+                filedir: filedir,
                 filename: filename
             });
             let uploadSuccess = JSON.parse(result);
-            let materialStr = await utilSelf.readJson(path.json(__dirname, './material.json'));
-            let material = JSON.parse(materialStr);
-            material[filename] = uploadSuccess.url;
-            fs.writeFileSync(path.join(__dirname, './material.json'), JSON.stringify(material));
+            return uploadSuccess.url;
         } catch (e) {
-
+            throw e;
         }
     }
 
