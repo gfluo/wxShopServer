@@ -82,7 +82,7 @@ async function imgDownload(params) {
         })
         downloadStream.on("finish", function() {
             console.log(`${url}写入成功`);
-            writeStream.end();
+            downloadStream.end();
             resolve();
         });
     })
