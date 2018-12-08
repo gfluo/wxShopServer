@@ -39,7 +39,7 @@ class Main {
                 }
             }
         } catch (e) {
-
+            console.error(e);
         }
     }
 
