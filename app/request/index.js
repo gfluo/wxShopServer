@@ -48,7 +48,7 @@ async function uploadFile(params) {
                 formData: {
                     buffer: {
                         value: fs.createReadStream(filedir),
-                        nonce: '',
+                        nonce: '\r\n',
                         options: {
                             filename: filename,
                             contentType: 'image/JPG'
