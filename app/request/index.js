@@ -40,13 +40,14 @@ async function post(params) {
 
 async function uploadFile(params) {
     let { url, filename, filedir } = params;
+    console.log(filedir);
     return new Promise((resolve, reject) => {
         try {
             request.post({
                 url: url,
                 formData: {
                     buffer: {
-                        value: fs.createReadStream(filedir),
+                        value: fs.readFileSync(filedir),
                         options: {
                             filename: filename,
                             contentType: 'image/jpg'
