@@ -81,7 +81,7 @@ async function imgDownload(params) {
             reject(err);        
         })
         downloadStream.on("finish", function() {
-            console.log(`${url}写入成功`);
+            console.log(`${filedir}写入成功`);
             downloadStream.end();
             resolve();
         });

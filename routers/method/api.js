@@ -10,7 +10,7 @@ class Main {
                 let m = mList[i];
                 let wxOnlinePostData = {
                     product_base: {
-
+                        "buy_limit": m.limit_buy_num
                     }
                 };
                 let wxCidInfo = await source.wxCidMatch(m.cat_id);
@@ -27,15 +27,50 @@ class Main {
                         filedir: goods_img_dir,
                     });
                     wxOnlinePostData.product_base.main_img = main_img;
-                    console.log(wxOnlinePostData.product_base);
+                    wxOnlinePostData.product_base.img = [];
+                    ///console.log(wxOnlinePostData.product_base);
                     let goods_thumb_dir = await source.imgDownload({
                         url: m.goods_thumb,
                         filedir: `${m.goods_id}_goods_thumb.jpg`
                     });
+                    let gtd = await platformWx.uploadImg({
+                        filename: `${m.goods_id}_goods_thumb.jpg`,
+                        filedir: goods_thumb_dir,
+                    })
+                    wxOnlinePostData.product_base.img.push(gtd);
                     let goods_original_img = await source.imgDownload({
                         url: m.original_img,
                         filedir: `${m.goods_id}_goods_original_img.jpg`
                     });
+                    let goi = await platformWx.uploadImg({
+                        filename: `${m.goods_id}_goods_original_img.jpg`,
+                        filedir: goods_original_img,
+                    });
+                    wxOnlinePostData.product_base.detail = [];
+                    wxOnlinePostData.product_base.detail.push({
+                        "img": goi
+                    })
+                    wxOnlinePostData.product_base.detail.push({
+                        "text": m.keywords
+                    })
+                    wxOnlinePostData.delivery_info = {
+                        "delivery_type": 0,
+                        "template_id": 0,
+                        "express": [
+                            {
+                                "id": 10000027,
+                                "price": 100
+                            },
+                            {
+                                "id": 10000028,
+                                "price": 100
+                            },
+                            {
+                                "id": 10000029,
+                                "price": 100
+                            }
+                        ]
+                    }
                 } else {
                     console.error('微信平台没有对应的分类信息');
                 }
