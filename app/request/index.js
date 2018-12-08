@@ -52,7 +52,8 @@ async function uploadFile(params) {
                             filename: filename,
                             contentType: 'image/jpg'
                         }
-                    }
+                    },
+                    filename: filename
                 },
             }, function optionalCallback(err, httpResponse, body) {
                 if (err) {
