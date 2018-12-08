@@ -100,7 +100,7 @@ class Main {
     static async uploadImg(params) {
         let { filename, filedir } = params;
         console.log(filename);
-        console.log(filesrc);
+        console.log(filedir);
         try {
             let token = await Main.getToken();
             let requestUrl =
