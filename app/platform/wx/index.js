@@ -110,7 +110,7 @@ class Main {
                 filedir: filedir,
                 filename: filename
             });
-            console.log(`wx图片上传结果${result}`);
+            console.log(result);
             let uploadSuccess = JSON.parse(result);
             return uploadSuccess.url;
         } catch (e) {
