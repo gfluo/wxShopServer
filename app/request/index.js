@@ -50,7 +50,7 @@ async function uploadFile(params) {
                         value: fs.readFileSync(filedir),
                         options: {
                             filename: filename,
-                            contentType: 'image/jpg'
+                            contentType: 'image/JPG'
                         }
                     },
                     filename: filename
