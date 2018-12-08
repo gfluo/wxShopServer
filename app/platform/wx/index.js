@@ -100,10 +100,9 @@ class Main {
     static async uploadImg(params) {
         let { filename, filedir } = params;
         try {
-            let filesrc = await readToken(path.join(__dirname, './token.json'));
-            let wxTokenInfo = JSON.parse(filesrc);
+            let token = await Main.getToken();
             let requestUrl =
-                url.uploadImg + `?access_token=${wxTokenInfo.access_token}`;
+                url.uploadImg + `?access_token=${token}`;
             let result = await requestSelf.uploadFile({
                 url: requestUrl,
                 filedir: filedir,
