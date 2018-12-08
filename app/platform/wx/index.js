@@ -56,7 +56,7 @@ class Main {
             let requestUrl =
                 url.merchandiseAdd + `?access_token=${token}`;
             let result = await requestSelf.post({ url: requestUrl, postData: info });
-            return JSON.parse(result);
+            console.log(result);
         } catch (e) {
             throw(e);
         }
