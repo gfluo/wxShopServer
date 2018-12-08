@@ -47,9 +47,9 @@ async function uploadFile(params) {
                 url: url + `&type=image`,
                 formData: {
                     buffer: {
-                        value: fs.readFileSync(filedir),
+                        value: fs.readFileSync(`/apps/wxShopServer/public/main.png`),
                         options: {
-                            filename: '1.jpg',
+                            filename: '1.png',
                             contentType: 'image/png'
                         }
                     },
