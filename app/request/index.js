@@ -32,7 +32,7 @@ async function post(params) {
         }, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 resolve(body);
-                console.log(body);
+                console.log(body.products_info[3]);
             }
             reject(error);
         });
