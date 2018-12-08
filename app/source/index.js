@@ -51,9 +51,9 @@ class Main {
             if (matchInfo[secondCid]) {
                 let wxTopCid = matchInfo[secondCid].wx_cid;
                 let wxSubInfo = await platformWx.getCategorySub(wxTopCid);
-                if ('ok' == wxSubInfo.errmsg) {
-                    return wxSubInfo.cate_list[0]
-                }
+                if (wxSubInfo.length) {
+                    return wxSubInfo[0];
+                } 
             }
             return;
         } catch (e) {

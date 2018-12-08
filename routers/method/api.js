@@ -36,6 +36,8 @@ class Main {
                         url: m.original_img,
                         filedir: `${m.goods_id}_goods_original_img.jpg`
                     });
+                } else {
+                    console.error('微信平台没有对应的分类信息');
                 }
             }
         } catch (e) {
