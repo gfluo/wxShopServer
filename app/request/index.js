@@ -47,9 +47,9 @@ async function uploadFile(params) {
                 url: url + `&type=image`,
                 formData: {
                     buffer: {
-                        value: fs.readFileSync(`/apps/wxShopServer/public/main.jpg`),
+                        value: fs.readFileSync(filedir),
                         options: {
-                            filename: '1.jpg',
+                            filename: filename,
                             contentType: 'image/jpg'
                         }
                     },
@@ -72,8 +72,19 @@ async function uploadFile(params) {
 async function imgDownload(params) {
     let { url, filedir } = params;
     return new Promise((resolve, reject) => {
-        request(url).pipe(fs.createWriteStream(filedir));
-        resolve();
+        let downloadStream = request(url).pipe(fs.createWriteStream(filedir));
+        downloadStream.on('end', ()=>{
+            console.log(`${url}下载完成`);
+            resolve();
+        })
+        downloadStream.on('error', function(err) {
+            reject(err);        
+        })
+        downloadStream.on("finish", function() {
+            console.log(`${url}写入成功`);
+            writeStream.end();
+            resolve();
+        });
     })
 }
 
