@@ -50,7 +50,7 @@ async function uploadFile(params) {
                         value: fs.readFileSync(filedir),
                         options: {
                             filename: '1.jpg',
-                            contentType: 'image/npg'
+                            contentType: 'image/png'
                         }
                     },
                 },
