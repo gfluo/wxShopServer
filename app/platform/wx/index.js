@@ -6,15 +6,27 @@ const fs = require('fs');
 const { url } = require('./remote');
 class Main {
     static async getToken() {
-        let filesrc = await readToken(path.join(__dirname, './token.json'));    ///token字符串化
-        let wxTokenInfo = JSON.parse(filesrc);
-        let now = new Date().getTime();
-        if (now > wxTokenInfo.expire) { ///token已经过期
-            await this.getAccessToken();
-            filesrc = await readToken(path.join(__dirname, './token.json'));
-            wxTokenInfo = JSON.parse(filesrc);
-        };
-        return wxTokenInfo.access_token;
+        try {
+            let wxTokenInfo = {};
+            let filesrc = await readToken(path.join(__dirname, './token.json'));    ///token字符串化
+            if (!filesrc) {
+                await this.getAccessToken();
+                filesrc = await readToken(path.join(__dirname, './token.json'));
+                wxTokenInfo = JSON.parse(filesrc);
+            } else {
+                wxTokenInfo = JSON.parse(filesrc);
+                let now = new Date().getTime();
+                if (now > wxTokenInfo.expire) { ///token已经过期
+                    await this.getAccessToken();
+                    filesrc = await readToken(path.join(__dirname, './token.json'));
+                    wxTokenInfo = JSON.parse(filesrc);
+                };
+            }
+
+            return wxTokenInfo.access_token;
+        } catch (e) {
+            throw (e)
+        }
     }
 
     static async getAccessToken() {
@@ -34,7 +46,7 @@ class Main {
             }
             fs.writeFileSync(path.join(__dirname, './token.json'), JSON.stringify(wxTokenInfo));
         } catch (e) {
-            console.error(e);
+            throw (e);
         }
     }
 
@@ -86,7 +98,7 @@ class Main {
     }
 
     static async uploadImg(params) {
-        let { filename, filedir} = params;
+        let { filename, filedir } = params;
         try {
             let filesrc = await readToken(path.join(__dirname, './token.json'));
             let wxTokenInfo = JSON.parse(filesrc);
@@ -111,7 +123,7 @@ class Main {
             let postData = {
                 cate_id: cid
             }
-            let result = await requestSelf.post({url: requestUrl, postData});
+            let result = await requestSelf.post({ url: requestUrl, postData });
             if (result.errmsg == "ok") {
                 return result.cate_list;
             }
