@@ -44,7 +44,7 @@ async function uploadFile(params) {
     return new Promise((resolve, reject) => {
         try {
             request.post({
-                url: url,
+                url: url + `&type=image`,
                 formData: {
                     buffer: {
                         value: fs.readFileSync(filedir),
@@ -53,7 +53,6 @@ async function uploadFile(params) {
                             contentType: 'image/JPG'
                         }
                     },
-                    filename: filename
                 },
             }, function optionalCallback(err, httpResponse, body) {
                 if (err) {
