@@ -13,10 +13,10 @@ class Main {
                         "buy_limit": m.limit_buy_num
                     }
                 };
-                let wxCidInfo = await source.wxCidMatch(m.cat_id);
-                if (wxCidInfo) {
+                let cidInfo = await source.wxCidMatch(m.cat_id);
+                if (cidInfo) {
                     wxOnlinePostData.product_base.category_id = [];
-                    wxOnlinePostData.product_base.category_id.push(wxCidInfo.id);
+                    wxOnlinePostData.product_base.category_id.push(cidInfo.wxSubInfo.id);
                     wxOnlinePostData.product_base.name = m.goods_name;
                     let goods_img_dir = await source.imgDownload({
                         url: m.goods_img,
@@ -53,6 +53,13 @@ class Main {
                     wxOnlinePostData.product_base.detail.push({
                         "text": m.keywords
                     })
+                    wxOnlinePostData.product_base.detail.push({
+                        "text": `次级分类id信息${cidInfo.secondCid.cid} -- ${cidInfo.secondCid.name}`
+                    })
+                    wxOnlinePostData.product_base.detail.push({
+                        "text": `顶级分类id信息${cidInfo.topCid.cid} -- ${cidInfo.topCid.name}`
+                    })
+                    console.log(wxOnlinePostData.product_base);
                     wxOnlinePostData.delivery_info = {
                         "delivery_type": 0,
                         "template_id": 0,
@@ -72,7 +79,7 @@ class Main {
                         ]
                     }
 
-                    console.log(wxOnlinePostData);
+                    ///console.log(wxOnlinePostData);
                 } else {
                     console.error('微信平台没有对应的分类信息');
                 }

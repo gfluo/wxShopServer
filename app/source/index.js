@@ -26,12 +26,10 @@ class Main {
         try {
             let upCidSrc = await requestSelf.get({ url: requestUrl });
             const resBody = JSON.parse(upCidSrc);
-            if (deep == 2 || deep == 3) {
-                console.log(resBody.data[0].cat_name);
-                return resBody.data[0].parent_id;
-            } else {
-                console.log(resBody.data[0].cat_name);
-                return resBody.data[0].parent_id;
+            ///console.log(resBody.data[0].cat_name);
+            return { 
+                cid: resBody.data[0].parent_id,
+                name: resBody.data[0].cat_name,
             }
         } catch (e) {
             throw (e);
@@ -43,17 +41,21 @@ class Main {
      */
     static async wxCidMatch(scid) {
         try {
-            let thirdCid = await Main.getUpCid(scid, 3);
-            let secondCid = await Main.getUpCid(thirdCid, 2);
+            let secondCid = await Main.getUpCid(scid, 3);
+            let topCid = await Main.getUpCid(secondCid.cid, 2);
             ///let topCid = await Main.getUpCid(secondCid, 1);
             let matchInfoSrc = await utilSelf.readJson(path.join(__dirname, './category.json'));
             let matchInfo = JSON.parse(matchInfoSrc);
-            if (matchInfo[secondCid]) {
-                let wxTopCid = matchInfo[secondCid].wx_cid;
+            if (matchInfo[topCid.cid]) {
+                let wxTopCid = matchInfo[topCid.cid].wx_cid;
                 let wxSubInfo = await platformWx.getCategorySub(wxTopCid);
                 if (wxSubInfo.length) {
-                    return wxSubInfo[0];
-                } 
+                    return {
+                        wxSubInfo: wxSubInfo[0],
+                        secondCid: secondCid,
+                        topCid: topCid,
+                    }
+                }
             }
             return;
         } catch (e) {
@@ -67,10 +69,10 @@ class Main {
     static async imgDownload(params) {
         try {
             let filedir = path.join(__dirname, `./files/${params.filedir}`);
-            await requestSelf.imgDownload({url: `${url.imgHead}/${params.url}`, filedir});
+            await requestSelf.imgDownload({ url: `${url.imgHead}/${params.url}`, filedir });
             return filedir;
         } catch (e) {
-            throw(e);
+            throw (e);
         }
     }
 }
