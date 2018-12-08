@@ -46,14 +46,13 @@ async function uploadFile(params) {
                 url: url,
                 formData: {
                     buffer: {
-                        value: fs.readFileSync(filedir),
+                        value: fs.createReadStream(filedir),
                         options: {
                             filename: filename,
                             contentType: 'image/jpg'
                         }
                     }
                 },
-                json: true,
             }, function optionalCallback(err, httpResponse, body) {
                 if (err) {
                     reject(err)
