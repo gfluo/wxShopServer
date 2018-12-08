@@ -65,16 +65,9 @@ class Main {
     static async getMerchandise(params) {
         let { status } = params;
         try {
-            let filesrc = await readToken(path.join(__dirname, './token.json'));
-            let wxTokenInfo = JSON.parse(filesrc);
-            let now = new Date().getTime();
-            if (now > wxTokenInfo.expire) { ///token已经过期
-                ///await this.getAccessToken();
-            };
-            filesrc = await readToken(path.join(__dirname, './token.json'));
-            wxTokenInfo = JSON.parse(filesrc);
+            let token = await Main.getToken();
             let requestUrl =
-                url.merchandise + `?access_token=${wxTokenInfo.access_token}`;
+                url.merchandise + `?access_token=${wxTokenInfo.token}`;
             console.log(requestUrl);
             let result = await requestSelf.post({ url: requestUrl, postData: { status: status } });
             console.log(result);
