@@ -50,29 +50,15 @@ class Main {
         }
     }
 
-    static async merchandiseOnline() {
-        let testInfoFile = path.join(__dirname, './addTest.json');
+    static async merchandiseOnline(info) {
         try {
-            let infoSrc = await utilSelf.readJson(testInfoFile);
-            let info = JSON.parse(infoSrc);
-            let filesrc = await readToken(path.join(__dirname, './token.json'));
-            console.log(filesrc);
-            let wxTokenInfo = JSON.parse(filesrc);
-            let now = new Date().getTime();
-            if (now > wxTokenInfo.expire) { ///token已经过期
-                ///await this.getAccessToken();
-            };
-            filesrc = await readToken(path.join(__dirname, './token.json'));
-            console.log(filesrc);
-            wxTokenInfo = JSON.parse(filesrc);
-            console.log(wxTokenInfo);
+            let token = await Main.getToken();
             let requestUrl =
-                url.merchandiseAdd + `?access_token=${wxTokenInfo.access_token}`;
-            console.log(requestUrl);
+                url.merchandiseAdd + `?access_token=${token}`;
             let result = await requestSelf.post({ url: requestUrl, postData: info });
-            console.log(result);
+            return JSON.parse(result);
         } catch (e) {
-            console.error(e);
+            throw(e);
         }
     }
 

@@ -78,7 +78,8 @@ class Main {
                             }
                         ]
                     }
-
+                    let onlineRes = await platformWx.merchandiseOnline(wxOnlinePostData);
+                    ctx.body = onlineRes;
                     ///console.log(wxOnlinePostData);
                 } else {
                     console.error('微信平台没有对应的分类信息');
