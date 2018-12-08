@@ -47,11 +47,10 @@ async function uploadFile(params) {
                 url: url + `&type=image`,
                 formData: {
                     buffer: {
-                        value: fs.createReadStream(filedir),
-                        nonce: '\r\n',
+                        value: fs.readFileSync(filedir),
                         options: {
-                            filename: filename,
-                            contentType: 'image/JPG'
+                            filename: '1.jpg',
+                            contentType: 'image/npg'
                         }
                     },
                 },
